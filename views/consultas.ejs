@@ -1,0 +1,54 @@
+<!-- views/consultas.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultas</title>
+
+    <!-- Adicione o link para o Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h2>Consultas do Paciente <%= paciente.nomePaciente %></h2>
+
+      <!-- Adicione a classe table e table-striped para uma tabela listrada -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID Consulta</th>
+            <th>Médico</th>
+            <th>Data</th>
+            <th>Tipo de Consulta</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const consulta of consultas) { %>
+          <tr>
+            <td><%= consulta.idConsulta %></td>
+            <td><%= consulta.nomeMedico %></td>
+            <!-- Use o método toLocaleDateString() para formatar a data -->
+            <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
+            <td><%= consulta.tipoDeConsulta %></td>
+            <td><%= consulta.statusDaConsulta %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <a href="/dashboard" class="btn btn-primary">Voltar</a>
+    </div>
+
+    <!-- Adicione o link para o Bootstrap JS e o jQuery (necessário para o Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

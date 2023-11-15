@@ -1,0 +1,21 @@
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    margin: 0;
+}
+.clinica-logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-left: 4rem;
+}
+.acesso-box {
+    background-color: #fff; /* Fundo branco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    padding: 20px;
+    text-align: center;
+}
