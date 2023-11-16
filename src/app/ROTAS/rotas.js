@@ -94,20 +94,29 @@ module.exports = (app) => {
     app.post("/agendar", paciController.cadastrarConsultaPac());
 
     // -----> Alterar consulta
-    app.get("/alterarConsulta/:idConsulta", paciController.consultarConsultaPorId);
+    app.get("/alterarConsulta/:idConsulta", (req, res) => {
+        if (req.session.user) {
+            const paciente = req.session.user;
+            const idConsulta = req.params.idConsulta;
 
-
-    app.post("/alterarConsulta/:idConsulta", (req, res) => {
-        const { idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
-
-        paciController.alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta)
-            .then(() => {
-                console.log("Consulta alterada com sucesso!");
-                res.redirect("/consultas");
-            })
-            .catch(erro => {
-                console.log(erro);
-                res.status(500).send("Erro ao alterar a consulta.");
-            });
+            paciController.obterDetalhesConsulta(idConsulta)
+                .then(consulta => {
+                    res.render('../views/paciente/consultas/alterarConsulta', { paciente, consulta, idConsulta });
+                    console.log(consulta);
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao obter detalhes da consulta.");
+                });
+        } else {
+            res.redirect('/login');
+        }
     });
+
+    // Rota para lidar com o envio do formulário de alteração
+    // Rota para lidar com o envio do formulário de alteração
+    app.post("/alterarConsulta/:idConsulta", paciController.alterarConsultaPac());
+
+
+    
 };

@@ -88,29 +88,37 @@ class DAO_pacientes{
         });
     }
 
-    alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+    alterarConsultaPac(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+        return new Promise((resolve, reject) => {
+            const sql = "UPDATE Consulta SET dataConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ? WHERE idConsulta = ?";
+            this._bd.query(sql, [dataConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao atualizar a consulta.");
+                }
+                resolve();
+            });
+        });
+    }
+
+    obterDetalhesConsulta(idConsulta) {
     return new Promise((resolve, reject) => {
-        // Verifica se os valores estão presentes antes de construir a query SQL
-        if (dataConsulta === undefined || tipoDeConsulta === undefined || statusDaConsulta === undefined) {
-            reject("Dados de consulta ausentes");
-            return;
-        }
-
-        const sql = `
-            UPDATE Consulta
-            SET dataConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ?
-            WHERE idConsulta = ?`;
-
-        this.db.query(sql, [dataConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro, resultado) => {
+        const sql = "SELECT * FROM Consulta WHERE idConsulta = ?";
+        this._bd.query(sql, [idConsulta], (erro, resultados) => {
             if (erro) {
                 console.log(erro);
-                reject("Erro ao atualizar a consulta.");
-            } else {
-                resolve();
+                return reject("Erro ao obter detalhes da consulta.");
             }
+            if (resultados.length === 0) {
+                return resolve(null); // Nenhuma consulta encontrada
+            }
+            const consulta = resultados[0];
+            resolve(consulta);
         });
     });
 }
+
+    
 } 
 
 module.exports = DAO_pacientes;

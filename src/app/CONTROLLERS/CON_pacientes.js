@@ -87,42 +87,37 @@ class CON_pacientes{
         });
     }
 
-    consultarConsultaPorId(req, res, next) {
-        if (req.session.user) {
-            const paciente = req.session.user;
-            const idConsulta = req.params.idConsulta;
-
-            const PacienteDAO = new paciDAO(bd);
-
-            PacienteDAO.alterarConsulta(idConsulta)
-                .then(consulta => {
-                    res.render('../views/paciente/consultas/alterarConsulta', { paciente, consulta });
-                })
-                .catch(erro => {
-                    console.log(erro);
-                    res.status(500).send("Erro ao obter os detalhes da consulta para alteração.");
-                });
-        } else {
-            res.redirect('/login');
-        }
-    }
-
-    alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
-        return new Promise((resolve, reject) => {
-            const PacienteDAO = new paciDAO(bd);
-
-            PacienteDAO.alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta)
-                .then(() => {
-                    resolve();
-                })
-                .catch(erro => {
-                    console.log(erro);
-                    reject("Erro ao alterar a consulta.");
-                });
-        });
-    }
+    obterDetalhesConsulta(idConsulta) {
+    return new Promise((resolve, reject) => {
+        const PacienteDAO = new paciDAO(bd); // Crie uma instância do DAO aqui
+        PacienteDAO.obterDetalhesConsulta(idConsulta)
+            .then(consulta => {
+                resolve(consulta);
+            })
+            .catch(erro => {
+                console.log(erro);
+                reject("Erro ao obter detalhes da consulta.");
+            });
+    });
 }
 
+    // ---> Alterar consulta
+    alterarConsultaPac() {
+        return function (req, res) {
+            const PacienteDAO = new paciDAO(bd);
+            const idConsulta = req.params.idConsulta;
+            const { dataConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
 
-
+            PacienteDAO.alterarConsultaPac(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta)
+                .then(() => {
+                    console.log("Consulta alterada com sucesso!");
+                    res.redirect("/consultas");
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao alterar a consulta.");
+                });
+        };
+    }
+}
 module.exports = CON_pacientes;
