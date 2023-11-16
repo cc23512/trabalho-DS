@@ -1,0 +1,75 @@
+<!-- views/consultas.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultas Med</title>
+
+    <!-- Adicione o link para o Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../public/consultas.css" />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h2>Consultas do Medico <%= medico.nomeMedico %></h2>
+
+      <!-- Adicione a classe table e table-striped para uma tabela listrada -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID Consulta</th>
+            <th>Médico</th>
+            <th>Data</th>
+            <th>Horario</th>
+            <th>Tipo de Consulta</th>
+            <th>Status</th>
+            <th>Alterar Consulta</th>
+            <th>Excluir Consulta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const consulta of consultas) { %>
+          <tr>
+            <td><%= consulta.idConsulta %></td>
+            <td><%= medico.nomeMedico %></td>
+            <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
+            <td><%= consulta.horaConsulta %></td>
+            <td><%= consulta.tipoDeConsulta %></td>
+            <td><%= consulta.statusDaConsulta %></td>
+            <td>
+              <!-- Adicione um link para a página de alteração com o ID da consulta -->
+              <a
+                href="/alterarConsulta/<%= consulta.idConsulta %>"
+                class="btn btn-warning"
+                >Alterar</a
+              >
+            </td>
+            <td>
+              <!-- Adicione um formulário para o botão de excluir -->
+              <form
+                action="/excluirConsulta/<%= consulta.idConsulta %>"
+                method="post"
+              >
+                <button type="submit" class="btn btn-danger">Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <a href="/dashboard" class="btn btn-primary">Voltar</a>
+    </div>
+
+    <!-- Adicione o link para o Bootstrap JS e o jQuery (necessário para o Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

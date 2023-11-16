@@ -89,18 +89,18 @@ class CON_pacientes{
 
     // exiber consulta paciente
     obterDetalhesConsulta(idConsulta) {
-    return new Promise((resolve, reject) => {
-        const PacienteDAO = new paciDAO(bd); // Crie uma instância do DAO aqui
-        PacienteDAO.obterDetalhesConsulta(idConsulta)
-            .then(consulta => {
-                resolve(consulta);
-            })
-            .catch(erro => {
-                console.log(erro);
-                reject("Erro ao obter detalhes da consulta.");
-            });
-    });
-}
+        return new Promise((resolve, reject) => {
+            const PacienteDAO = new paciDAO(bd); // Crie uma instância do DAO aqui
+            PacienteDAO.obterDetalhesConsulta(idConsulta)
+                .then(consulta => {
+                    resolve(consulta);
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    reject("Erro ao obter detalhes da consulta.");
+                });
+        });
+    }
 
     // ---> Alterar consulta
     alterarConsultaPac() {
