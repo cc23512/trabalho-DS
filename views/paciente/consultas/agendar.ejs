@@ -1,0 +1,85 @@
+<!-- views/agendar.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agendar Consulta</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Agendar Consulta</h2>
+      <form action="/agendar" method="post">
+        <!-- Seletor de Médicos -->
+        <div class="form-group">
+          <label for="idMedico">Selecione o Médico:</label>
+          <select class="form-control" id="idMedico" name="idMedico" required>
+            <!-- Aqui você deve incluir dinamicamente as opções com os médicos -->
+            <% for (const medico of medicos) { %>
+            <option value="<%= medico.idMedico %>">
+              <%= `${medico.nomeMedico} - ${medico.especialidade}` %>
+            </option>
+            <% } %>
+          </select>
+        </div>
+
+        <!-- ID do Paciente (texto fixo) -->
+        <div class="form-group">
+          <label for="idPaciente">ID do Paciente:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="idPaciente"
+            name="idPaciente"
+            value="<%= paciente.idPaciente %>"
+            readonly
+          />
+        </div>
+
+        <!-- Data da Consulta -->
+        <div class="form-group">
+          <label for="dataConsulta">Data da Consulta:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dataConsulta"
+            name="dataConsulta"
+            required
+          />
+        </div>
+
+        <!-- Tipo de Consulta -->
+        <div class="form-group">
+          <label for="tipoDeConsulta">Tipo de Consulta:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tipoDeConsulta"
+            name="tipoDeConsulta"
+            required
+          />
+        </div>
+
+        <!-- Status da Consulta -->
+        <div class="form-group">
+          <label for="statusDaConsulta">Status da Consulta:</label>
+          <select
+            class="form-control"
+            id="statusDaConsulta"
+            name="statusDaConsulta"
+            required
+          >
+            <option value="Ativa">Ativa</option>
+            <option value="Realizada">Realizada</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+        </div>
+
+        <!-- Botão de envio -->
+        <button type="submit" class="btn btn-primary">Agendar Consulta</button>
+      </form>
+      <a href="/dashboard" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+  </body>
+</html>

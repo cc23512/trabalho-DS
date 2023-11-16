@@ -5,6 +5,7 @@ class DAO_pacientes{
         this._bd = bd;
     }
     
+    // ---> cadastro paciente no bd
     inserirPessoaEJS(nome, sobrenome, telefone, email, senha) {
         return new Promise((resolve, reject) => {
             const sql = "INSERT INTO Paciente (nomePaciente, sobrenomePac, telefone, email, senha) VALUES (?, ?, ?, ?, ?)";
@@ -19,6 +20,7 @@ class DAO_pacientes{
         });
     }
     
+    // ---> verificação de Login
     buscarPacientePorCredenciais(email, senha) {
         return new Promise((resolve, reject) => {
             const sql = "SELECT * FROM Paciente WHERE email = ? AND senha = ?";
@@ -36,6 +38,7 @@ class DAO_pacientes{
         });
     }
 
+    // ---> consultar Consultas
     consultarConsultas(idPaciente) {
         return new Promise((resolve, reject) => {
             const sql = `
@@ -56,8 +59,34 @@ class DAO_pacientes{
         });
     }
 
+    // ---> agender Consultas
+    agendarConsultaPac(idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+        return new Promise((resolve, reject) => {
+            const sql = "INSERT INTO Consulta (idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta) VALUES (?, ?, ?, ?, ?)";
 
+            this._bd.query(sql, [idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta], (erro) => {
+            if (erro) {
+                console.log(erro);
+                return reject("Erro ao inserir o registro.");
+            }
+            resolve();
+            });
+        });
+    }
 
-} // end da classe
+    // ---> obter dados dos medicos para o form agender consulta
+    obterTodosOsMedicos() {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM Medico";
+            this._bd.query(sql, (erro, resultados) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao obter a lista de médicos.");
+                }
+                resolve(resultados);
+            });
+        });
+    }
+} 
 
 module.exports = DAO_pacientes;

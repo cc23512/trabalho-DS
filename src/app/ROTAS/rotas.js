@@ -9,26 +9,25 @@ module.exports = (app) => {
 
 
     app.get("/", (req, res) => {
-        res.render('home')
+        res.render('../views/home/home')
     })
 
     // -----> Cadastro
     app.get("/cadastroPacientes", (req, res) => {
-        res.render('telaDeCadastro')
+        res.render('../views/cadastro/telaDeCadastro')
         console.log("Acabou de usar a porta /cadastroPacientes");
     });
-    
     app.post("/inclusaoNovoCliente", paciController.inserirPessoa()); 
-
-
+    
+    
     // -----> Login
     app.get("/login", (req, res) => {
-        res.render('telaDeLogin');
+        res.render('../views/paciente/telaDeLogin');
     });
 
     app.post("/login", (req, res) => {
         const { email, senha } = req.body;
-
+        
         paciController.verificarCredenciais(email, senha)
             .then(paciente => {
                 if (paciente) {
@@ -44,33 +43,55 @@ module.exports = (app) => {
                 res.redirect('/login')
             });
     });
-
+        
+    // -----> Dashboard
     app.get("/dashboard", (req, res) => {
         if (req.session.user) {
             const paciente = req.session.user; 
-            res.render('dashboard', { paciente }); 
+            res.render('../views/paciente/dashboard', { paciente }); 
         } else {
             res.redirect('/login');
         }
     });
+        
 
+    // -----> Tabela Consultas
     app.get("/consultas", (req, res) => {
-    if (req.session.user) {
-        const paciente = req.session.user;
-
-        // Adicione a lógica para buscar as consultas do paciente
-        paciController.consultarConsultas(paciente.idPaciente)
+        if (req.session.user) {
+            const paciente = req.session.user;
+            
+        
+            paciController.consultarConsultas(paciente.idPaciente)
             .then(consultas => {
-                res.render('consultas', { paciente, consultas });
+                res.render('../views/paciente/consultas/consultas', { paciente, consultas });
             })
             .catch(erro => {
                 console.log(erro);
                 res.status(500).send("Erro ao buscar consultas.");
             });
-    } else {
-        res.redirect('/login');
-    }
-});
+        } else {
+            res.redirect('/login');
+        }
+    });
+
+    // -----> Agender Consultas
+    app.get("/agendarConsultaPac", (req, res) => {
+        if (req.session.user) {
+            const paciente = req.session.user;
+        
+            paciController.obterListaDeMedicos()
+                .then(medicos => {
+                    res.render('../views/paciente/consultas/agendar', { paciente, medicos });
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao obter a lista de médicos.");
+                });
+        } else {
+            res.redirect('/login');
+        }
+    });
+    app.post("/agendar", paciController.cadastrarConsultaPac());
 
 
 };

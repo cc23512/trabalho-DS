@@ -4,6 +4,7 @@ const bd = require("../../config/database");
 class CON_pacientes{
     // ...
 
+    // cadastro paciente no bd
     inserirPessoa() {
         return function(req, res) {
             const PacienteDAO = new paciDAO(bd);
@@ -12,7 +13,7 @@ class CON_pacientes{
             PacienteDAO.inserirPessoaEJS(nome, sobrenome, telefone, email, senha)
                 .then(() => {
                     console.log("Registro inserido com sucesso!");
-                    res.send("Chegou aqui o meninao"); // Redireciona o usuário para a página inicial ou outra página desejada
+                    res.redirect("/login"); 
                 })
                 .catch(erro => {
                     console.log(erro);
@@ -21,6 +22,7 @@ class CON_pacientes{
         };
     }
 
+    // ---> verificação de login
     verificarCredenciais(email, senha) {
         return new Promise((resolve, reject) => {
             const PacienteDAO = new paciDAO(bd);
@@ -36,6 +38,7 @@ class CON_pacientes{
         });
     }
 
+    // ---> consultar consultas
     consultarConsultas(idPaciente) {
         return new Promise((resolve, reject) => {
             const PacienteDAO = new paciDAO(bd);
@@ -47,6 +50,39 @@ class CON_pacientes{
                 .catch(erro => {
                     console.log(erro);
                     reject("Erro ao consultar consultas.");
+                });
+        });
+    }
+
+    // ---> agender Consultas
+    cadastrarConsultaPac() {
+        return function(req, res) {
+            const PacienteDAO = new paciDAO(bd);
+            const { idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
+
+            PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta)
+                .then(() => {
+                    console.log("Registro inserido com sucesso!");
+                    res.redirect("/consultas"); 
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao inserir o registro.");
+                });
+        };
+    }
+
+    // ---> obter dados dos medicos para o form agender consulta
+    obterListaDeMedicos() {
+        return new Promise((resolve, reject) => {
+            const PacienteDAO = new paciDAO(bd);  // Certifique-se de ter um DAO para os médicos
+            PacienteDAO.obterTodosOsMedicos()
+                .then(medicos => {
+                    resolve(medicos);
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    reject("Erro ao obter a lista de médicos.");
                 });
         });
     }
