@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="../../public/consultas.css" />
   </head>
 
   <body>
@@ -27,6 +28,7 @@
             <th>Data</th>
             <th>Tipo de Consulta</th>
             <th>Status</th>
+            <th>Alterar Consulta</th>
           </tr>
         </thead>
         <tbody>
@@ -34,10 +36,17 @@
           <tr>
             <td><%= consulta.idConsulta %></td>
             <td><%= consulta.nomeMedico %></td>
-            <!-- Use o método toLocaleDateString() para formatar a data -->
             <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
             <td><%= consulta.tipoDeConsulta %></td>
             <td><%= consulta.statusDaConsulta %></td>
+            <td>
+              <!-- Adicione um link para a página de alteração com o ID da consulta -->
+              <a
+                href="/alterarConsulta/<%= consulta.idConsulta %>"
+                class="btn btn-warning"
+                >Alterar</a
+              >
+            </td>
           </tr>
           <% } %>
         </tbody>

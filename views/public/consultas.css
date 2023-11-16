@@ -1,0 +1,9 @@
+.table-responsive {
+    max-width: 100%;
+}
+
+/* Ajuste a largura das colunas conforme necessário */
+.table td,
+.table th {
+    width: 20px;
+}

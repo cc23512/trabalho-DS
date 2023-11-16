@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Configurações do cabeçalho -->
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Alterar Consulta</h2>
+
+      <!-- Formulário para alterar consulta -->
+      <form action="/alterarConsulta/<%= idConsulta %>" method="post">
+        <!-- Campos do formulário (data, tipoDeConsulta, statusDaConsulta, etc.) -->
+        <!-- Use valores padrão dos campos com os detalhes da consulta atual -->
+        <label for="dataConsulta">Data da Consulta:</label>
+        <input
+          type="date"
+          id="dataConsulta"
+          name="dataConsulta"
+          value="<%= consulta.dataConsulta %>"
+          required
+        />
+
+        <label for="tipoDeConsulta">Tipo de Consulta:</label>
+        <input
+          type="text"
+          id="tipoDeConsulta"
+          name="tipoDeConsulta"
+          value="<%= consulta.tipoDeConsulta %>"
+          required
+        />
+
+        <label for="statusDaConsulta">Status da Consulta:</label>
+        <select id="statusDaConsulta" name="statusDaConsulta" required>
+          <option value="Ativa">Ativa</option>
+          <option value="Realizada">Realizada</option>
+          <option value="Cancelada">Cancelada</option>
+        </select>
+        <!-- Outros campos do formulário -->
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+      </form>
+
+      <a href="/consultas" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </body>
+</html>

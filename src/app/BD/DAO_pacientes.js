@@ -87,6 +87,30 @@ class DAO_pacientes{
             });
         });
     }
+
+    alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+    return new Promise((resolve, reject) => {
+        // Verifica se os valores estão presentes antes de construir a query SQL
+        if (dataConsulta === undefined || tipoDeConsulta === undefined || statusDaConsulta === undefined) {
+            reject("Dados de consulta ausentes");
+            return;
+        }
+
+        const sql = `
+            UPDATE Consulta
+            SET dataConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ?
+            WHERE idConsulta = ?`;
+
+        this.db.query(sql, [dataConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro, resultado) => {
+            if (erro) {
+                console.log(erro);
+                reject("Erro ao atualizar a consulta.");
+            } else {
+                resolve();
+            }
+        });
+    });
+}
 } 
 
 module.exports = DAO_pacientes;

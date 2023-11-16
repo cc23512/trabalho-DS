@@ -87,6 +87,42 @@ class CON_pacientes{
         });
     }
 
+    consultarConsultaPorId(req, res, next) {
+        if (req.session.user) {
+            const paciente = req.session.user;
+            const idConsulta = req.params.idConsulta;
+
+            const PacienteDAO = new paciDAO(bd);
+
+            PacienteDAO.alterarConsulta(idConsulta)
+                .then(consulta => {
+                    res.render('../views/paciente/consultas/alterarConsulta', { paciente, consulta });
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao obter os detalhes da consulta para alteração.");
+                });
+        } else {
+            res.redirect('/login');
+        }
+    }
+
+    alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+        return new Promise((resolve, reject) => {
+            const PacienteDAO = new paciDAO(bd);
+
+            PacienteDAO.alterarConsulta(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta)
+                .then(() => {
+                    resolve();
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    reject("Erro ao alterar a consulta.");
+                });
+        });
+    }
 }
+
+
 
 module.exports = CON_pacientes;
