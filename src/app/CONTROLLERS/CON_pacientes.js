@@ -58,9 +58,9 @@ class CON_pacientes{
     cadastrarConsultaPac() {
         return function(req, res) {
             const PacienteDAO = new paciDAO(bd);
-            const { idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
+            const { idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
 
-            PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta)
+            PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
                 .then(() => {
                     console.log("Registro inserido com sucesso!");
                     res.redirect("/consultas"); 
@@ -87,6 +87,7 @@ class CON_pacientes{
         });
     }
 
+    // exiber consulta paciente
     obterDetalhesConsulta(idConsulta) {
     return new Promise((resolve, reject) => {
         const PacienteDAO = new paciDAO(bd); // Crie uma instância do DAO aqui
@@ -106,9 +107,9 @@ class CON_pacientes{
         return function (req, res) {
             const PacienteDAO = new paciDAO(bd);
             const idConsulta = req.params.idConsulta;
-            const { dataConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
+            const { dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
 
-            PacienteDAO.alterarConsultaPac(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta)
+            PacienteDAO.alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
                 .then(() => {
                     console.log("Consulta alterada com sucesso!");
                     res.redirect("/consultas");
@@ -120,7 +121,7 @@ class CON_pacientes{
         };
     }
 
-    // Adicione o método para exclusão de consulta no controlador
+    // excluir consulta paciente
     excluirConsultaPac() {
         return function (req, res) {
             const PacienteDAO = new paciDAO(bd);

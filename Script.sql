@@ -1,31 +1,29 @@
+CREATE TABLE Medico (
+    idMedico INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    nomeMedico VARCHAR(20) NOT NULL,
+    sobrenomeMed VARCHAR(30) NOT NULL,
+    especialidade VARCHAR(30) NOT NULL,
+    emailMed VARCHAR(100) NOT NULL,
+    senhaMed VARCHAR(20) NOT NULL
+);
 
+CREATE TABLE Paciente (
+    idPaciente INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    nomePaciente VARCHAR(20),
+    sobrenomePac VARCHAR(30),
+    telefone VARCHAR(20),
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(20) NOT NULL
+);
 
-create table Medico
-(
-    idMedico int identity primary key not null,
-    nomeMedico varchar(20) not null,
-    sobrenomeMed varchar(30) not null,
-    especialidade varchar (30) not null
-
-)
-
-create table Paciente
-(
-    idPaciente int identity primary key not null,
-    nomePaciente varchar(20),
-    sobrenomePac varchar(30),
-    telefone varchar(20),
-    email varchar(100) not null,
-    senha varchar(20) not null
-)
-
-create table Consulta
-(
-    idConsulta int identity primary key not null,
-    idMedico int not null foreign key references Clinica.Medico(idMedico),
-    idPaciente int not null foreign key references Clinica.Paciente(idPaciente),
-    dataConsulta datetime not null,
-    tipoDeConsulta varchar(30) not null,
-    statusDaConsulta varchar(30) not null,
-)
-
+CREATE TABLE Consulta (
+    idConsulta INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    idMedico INT NOT NULL,
+    idPaciente INT NOT NULL,
+    dataConsulta DATE NOT NULL,
+    horaConsulta TIME NOT NULL,
+    tipoDeConsulta VARCHAR(30) NOT NULL,
+    statusDaConsulta VARCHAR(30) NOT NULL,
+    FOREIGN KEY (idMedico) REFERENCES Medico(idMedico),
+    FOREIGN KEY (idPaciente) REFERENCES Paciente(idPaciente)
+);

@@ -16,9 +16,20 @@
           type="date"
           id="dataConsulta"
           name="dataConsulta"
-          value="<%= consulta.dataConsulta %>"
+          value="<%= consulta.dataConsulta ? moment(consulta.dataConsulta).format('YYYY-MM-DD') : '' %>"
           required
         />
+        <br />
+
+        <label for="horaConsulta">Horario da Consulta:</label>
+        <input
+          type="time"
+          id="horaConsulta"
+          name="horaConsulta"
+          value="<%= consulta.horaConsulta %>"
+          required
+        />
+        <br />
 
         <label for="tipoDeConsulta">Tipo de Consulta:</label>
         <input
@@ -28,15 +39,16 @@
           value="<%= consulta.tipoDeConsulta %>"
           required
         />
+        <br />
 
         <label for="statusDaConsulta">Status da Consulta:</label>
         <select id="statusDaConsulta" name="statusDaConsulta" required>
-          <option value="Ativa">Ativa</option>
-          <option value="Realizada">Realizada</option>
-          <option value="Cancelada">Cancelada</option>
+          <option value="Ativa" <%= consulta.statusDaConsulta === 'Ativa' ? 'selected' : '' %>>Ativa</option>
+          <option value="Realizada" <%= consulta.statusDaConsulta === 'Realizada' ? 'selected' : '' %>>Realizada</option>
+          <option value="Cancelada" <%= consulta.statusDaConsulta === 'Cancelada' ? 'selected' : '' %>>Cancelada</option>
         </select>
         <!-- Outros campos do formulário -->
-
+        <br />
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
       </form>
 

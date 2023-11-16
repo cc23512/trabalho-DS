@@ -60,11 +60,11 @@ class DAO_pacientes{
     }
 
     // ---> agender Consultas
-    agendarConsultaPac(idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+    agendarConsultaPac(idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) {
         return new Promise((resolve, reject) => {
-            const sql = "INSERT INTO Consulta (idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta) VALUES (?, ?, ?, ?, ?)";
+            const sql = "INSERT INTO Consulta (idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) VALUES (?, ?, ?, ?, ?, ?)";
 
-            this._bd.query(sql, [idMedico, idPaciente, dataConsulta, tipoDeConsulta, statusDaConsulta], (erro) => {
+            this._bd.query(sql, [idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta], (erro) => {
             if (erro) {
                 console.log(erro);
                 return reject("Erro ao inserir o registro.");
@@ -88,10 +88,11 @@ class DAO_pacientes{
         });
     }
 
-    alterarConsultaPac(idConsulta, dataConsulta, tipoDeConsulta, statusDaConsulta) {
+    // alterar consulta
+    alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) {
         return new Promise((resolve, reject) => {
-            const sql = "UPDATE Consulta SET dataConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ? WHERE idConsulta = ?";
-            this._bd.query(sql, [dataConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro) => {
+            const sql = "UPDATE Consulta SET dataConsulta = ?, horaConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ? WHERE idConsulta = ?";
+            this._bd.query(sql, [dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro) => {
                 if (erro) {
                     console.log(erro);
                     return reject("Erro ao atualizar a consulta.");
@@ -101,6 +102,7 @@ class DAO_pacientes{
         });
     }
 
+    // exibir consulta paciente
     obterDetalhesConsulta(idConsulta) {
         return new Promise((resolve, reject) => {
             const sql = "SELECT * FROM Consulta WHERE idConsulta = ?";
@@ -118,6 +120,7 @@ class DAO_pacientes{
         });
     }
 
+    // excluir consulta paciente
     excluirConsultaPac(idConsulta) {
     return new Promise((resolve, reject) => {
         const sql = "DELETE FROM Consulta WHERE idConsulta = ?";

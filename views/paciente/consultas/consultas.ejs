@@ -26,6 +26,7 @@
             <th>ID Consulta</th>
             <th>Médico</th>
             <th>Data</th>
+            <th>Horario</th>
             <th>Tipo de Consulta</th>
             <th>Status</th>
             <th>Alterar Consulta</th>
@@ -38,6 +39,7 @@
             <td><%= consulta.idConsulta %></td>
             <td><%= consulta.nomeMedico %></td>
             <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
+            <td><%= consulta.horaConsulta %></td>
             <td><%= consulta.tipoDeConsulta %></td>
             <td><%= consulta.statusDaConsulta %></td>
             <td>

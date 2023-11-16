@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
 connection.connect(function (erro) {
     if (erro){
         console.log("ERRO NA CONEXÃO COM O BD23512.");
+        console.log(erro)
     }else{
         console.log("Conexão com o BD23512 realizada com SUCESSSO.");
     }
