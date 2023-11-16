@@ -119,5 +119,24 @@ class CON_pacientes{
                 });
         };
     }
+
+    // Adicione o método para exclusão de consulta no controlador
+    excluirConsultaPac() {
+        return function (req, res) {
+            const PacienteDAO = new paciDAO(bd);
+            const idConsulta = req.params.idConsulta;
+
+            PacienteDAO.excluirConsultaPac(idConsulta)
+                .then(() => {
+                    console.log("Consulta excluída com sucesso!");
+                    res.redirect("/consultas");
+                })
+                .catch((erro) => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao excluir a consulta.");
+                });
+        };
+    }
+
 }
 module.exports = CON_pacientes;

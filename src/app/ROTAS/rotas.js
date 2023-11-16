@@ -117,6 +117,10 @@ module.exports = (app) => {
     // Rota para lidar com o envio do formulário de alteração
     app.post("/alterarConsulta/:idConsulta", paciController.alterarConsultaPac());
 
+    // Adicione a rota de exclusão de consulta
+    app.post("/excluirConsulta/:idConsulta", paciController.excluirConsultaPac());
+
+
 
     
 };

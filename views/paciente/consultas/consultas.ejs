@@ -29,6 +29,7 @@
             <th>Tipo de Consulta</th>
             <th>Status</th>
             <th>Alterar Consulta</th>
+            <th>Excluir Consulta</th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +47,15 @@
                 class="btn btn-warning"
                 >Alterar</a
               >
+            </td>
+            <td>
+              <!-- Adicione um formulário para o botão de excluir -->
+              <form
+                action="/excluirConsulta/<%= consulta.idConsulta %>"
+                method="post"
+              >
+                <button type="submit" class="btn btn-danger">Excluir</button>
+              </form>
             </td>
           </tr>
           <% } %>

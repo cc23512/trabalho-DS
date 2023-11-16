@@ -102,22 +102,34 @@ class DAO_pacientes{
     }
 
     obterDetalhesConsulta(idConsulta) {
+        return new Promise((resolve, reject) => {
+            const sql = "SELECT * FROM Consulta WHERE idConsulta = ?";
+            this._bd.query(sql, [idConsulta], (erro, resultados) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao obter detalhes da consulta.");
+                }
+                if (resultados.length === 0) {
+                    return resolve(null); // Nenhuma consulta encontrada
+                }
+                const consulta = resultados[0];
+                resolve(consulta);
+            });
+        });
+    }
+
+    excluirConsultaPac(idConsulta) {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM Consulta WHERE idConsulta = ?";
-        this._bd.query(sql, [idConsulta], (erro, resultados) => {
+        const sql = "DELETE FROM Consulta WHERE idConsulta = ?";
+        this._bd.query(sql, [idConsulta], (erro) => {
             if (erro) {
                 console.log(erro);
-                return reject("Erro ao obter detalhes da consulta.");
+                return reject("Erro ao excluir a consulta.");
             }
-            if (resultados.length === 0) {
-                return resolve(null); // Nenhuma consulta encontrada
-            }
-            const consulta = resultados[0];
-            resolve(consulta);
+            resolve();
         });
     });
 }
-
     
 } 
 
