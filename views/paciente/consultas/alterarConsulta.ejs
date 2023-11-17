@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <!-- Configurações do cabeçalho -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alterar Consulta</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   </head>
   <body>
     <div class="container mt-5">
@@ -9,50 +14,68 @@
 
       <!-- Formulário para alterar consulta -->
       <form action="/alterarConsulta/<%= idConsulta %>" method="post">
+
         <!-- Campos do formulário (data, tipoDeConsulta, statusDaConsulta, etc.) -->
         <!-- Use valores padrão dos campos com os detalhes da consulta atual -->
-        <label for="dataConsulta">Data da Consulta:</label>
-        <input
-          type="date"
-          id="dataConsulta"
-          name="dataConsulta"
-          value="<%= consulta.dataConsulta ? moment(consulta.dataConsulta).format('YYYY-MM-DD') : '' %>"
-          required
-        />
-        <br />
 
-        <label for="horaConsulta">Horario da Consulta:</label>
-        <input
-          type="time"
-          id="horaConsulta"
-          name="horaConsulta"
-          value="<%= consulta.horaConsulta %>"
-          required
-        />
-        <br />
+        <div class="form-group">
+          <label for="dataConsulta">Data da Consulta:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dataConsulta"
+            name="dataConsulta"
+            value="<%= consulta.dataConsulta ? moment(consulta.dataConsulta).format('YYYY-MM-DD') : '' %>"
+            required
+          />
+        </div>
 
-        <label for="tipoDeConsulta">Tipo de Consulta:</label>
-        <input
-          type="text"
-          id="tipoDeConsulta"
-          name="tipoDeConsulta"
-          value="<%= consulta.tipoDeConsulta %>"
-          required
-        />
-        <br />
+        <div class="form-group">
+          <label for="horaConsulta">Horário da Consulta:</label>
+          <input
+            type="time"
+            class="form-control"
+            id="horaConsulta"
+            name="horaConsulta"
+            value="<%= consulta.horaConsulta %>"
+            required
+          />
+        </div>
 
-        <label for="statusDaConsulta">Status da Consulta:</label>
-        <select id="statusDaConsulta" name="statusDaConsulta" required>
-          <option value="Ativa" <%= consulta.statusDaConsulta === 'Ativa' ? 'selected' : '' %>>Ativa</option>
-          <option value="Realizada" <%= consulta.statusDaConsulta === 'Realizada' ? 'selected' : '' %>>Realizada</option>
-          <option value="Cancelada" <%= consulta.statusDaConsulta === 'Cancelada' ? 'selected' : '' %>>Cancelada</option>
-        </select>
+        <div class="form-group">
+          <label for="tipoDeConsulta">Tipo de Consulta:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tipoDeConsulta"
+            name="tipoDeConsulta"
+            value="<%= consulta.tipoDeConsulta %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="statusDaConsulta">Status da Consulta:</label>
+          <select class="form-control" id="statusDaConsulta" name="statusDaConsulta" required>
+            <option value="Ativa" <%= consulta.statusDaConsulta === 'Ativa' ? 'selected' : '' %>>Ativa</option>
+            <option value="Realizada" <%= consulta.statusDaConsulta === 'Realizada' ? 'selected' : '' %>>Realizada</option>
+            <option value="Cancelada" <%= consulta.statusDaConsulta === 'Cancelada' ? 'selected' : '' %>>Cancelada</option>
+          </select>
+        </div>
+
         <!-- Outros campos do formulário -->
-        <br />
-        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-      </form>
 
-      <a href="/consultas" class="btn btn-secondary">Cancelar</a>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+          <a href="/consultas" class="btn btn-secondary">Cancelar</a>
+        </div>
+
+      </form>
     </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

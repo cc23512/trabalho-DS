@@ -45,7 +45,7 @@
             <td>
               <!-- Adicione um link para a página de alteração com o ID da consulta -->
               <a
-                href="/alterarConsulta/<%= consulta.idConsulta %>"
+                href="/alterarConsult/<%= consulta.idConsulta %>"
                 class="btn btn-warning"
                 >Alterar</a
               >
@@ -53,7 +53,7 @@
             <td>
               <!-- Adicione um formulário para o botão de excluir -->
               <form
-                action="/excluirConsulta/<%= consulta.idConsulta %>"
+                action="/excluirConsult/<%= consulta.idConsulta %>"
                 method="post"
               >
                 <button type="submit" class="btn btn-danger">Excluir</button>
@@ -64,7 +64,7 @@
         </tbody>
       </table>
 
-      <a href="/dashboard" class="btn btn-primary">Voltar</a>
+      <a href="/dashboardMed" class="btn btn-primary">Voltar</a>
     </div>
 
     <!-- Adicione o link para o Bootstrap JS e o jQuery (necessário para o Bootstrap) -->
