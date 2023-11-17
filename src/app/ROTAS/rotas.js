@@ -194,8 +194,8 @@ module.exports = (app) => {
 
     app.post('/alterarConsulta/:idConsulta', paciController.alterarConsultaPac());
     app.post('/alterarConsultaMed/:idConsulta', medController.alterarConsultaPac());
-
-    // Adicione a rota de exclusão de consulta
+    
+    // excluir consultas cadastradas
     app.post('/excluirConsulta/:idConsulta', paciController.excluirConsultaPac());
     app.post('/excluirConsultaMed/:idConsulta', medController.excluirConsultaPac());
 
