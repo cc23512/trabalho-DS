@@ -48,6 +48,33 @@ class DAO_medico{
             });
         });
     }
+
+    alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) {
+        return new Promise((resolve, reject) => {
+            const sql = "UPDATE Consulta SET dataConsulta = ?, horaConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ? WHERE idConsulta = ?";
+            this._bd.query(sql, [dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta, idConsulta], (erro) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao atualizar a consulta.");
+                }
+                resolve();
+            });
+        });
+    }
+
+    // excluir consulta paciente
+    excluirConsultaPac(idConsulta) {
+        return new Promise((resolve, reject) => {
+            const sql = "DELETE FROM Consulta WHERE idConsulta = ?";
+            this._bd.query(sql, [idConsulta], (erro) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao excluir a consulta.");
+                }
+                resolve();
+            });
+        });
+    }
 }
 
 module.exports = DAO_medico;

@@ -77,7 +77,7 @@ module.exports = (app) => {
                 res.redirect('/login')
             });
     });
-        
+
     // -----> Dashboard
     app.get('/dashboard', (req, res) => {
         if (req.session.user) {
@@ -118,21 +118,21 @@ module.exports = (app) => {
     });
 
     app.get('/consultasMed', (req, res) => {
-    if (req.session.user) {
-        const medico = req.session.user;
+        if (req.session.user) {
+            const medico = req.session.user;
 
-        medController.consultarConsultasMed(medico.idMedico)
-            .then(consultas => {
-                res.render('../views/medico/consultasMed/consultasMed', { medico, consultas });
-            })
-            .catch(erro => {
-                console.log(erro);
-                res.status(500).send('Erro ao buscar consultas.');
-            });
-    } else {
-        res.redirect('/loginMed');
-    }
-});
+            medController.consultarConsultasMed(medico.idMedico)
+                .then(consultas => {
+                    res.render('../views/medico/consultasMed/consultasMed', { medico, consultas });
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send('Erro ao buscar consultas.');
+                });
+        } else {
+            res.redirect('/loginMed');
+        }
+    });
 
     // -----> Agender Consultas
     app.get('/agendarConsultaPac', (req, res) => {
@@ -173,12 +173,30 @@ module.exports = (app) => {
         }
     });
 
+    app.get('/alterarConsultaMed/:idConsulta', (req, res) => {
+        if (req.session.user) {
+            const medico = req.session.user;
+            const idConsulta = req.params.idConsulta;
+
+            paciController.obterDetalhesConsulta(idConsulta)
+                .then(consulta => {
+                    res.render('../views/medico/consultasMed/alterarConsultaMed', { medico, consulta, idConsulta });
+                    console.log(consulta);
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send('Erro ao obter detalhes da consulta.');
+                });
+        } else {
+            res.redirect('/loginMed');
+        }
+    });
+
     app.post('/alterarConsulta/:idConsulta', paciController.alterarConsultaPac());
+    app.post('/alterarConsultaMed/:idConsulta', medController.alterarConsultaPac());
 
     // Adicione a rota de exclusão de consulta
     app.post('/excluirConsulta/:idConsulta', paciController.excluirConsultaPac());
+    app.post('/excluirConsultaMed/:idConsulta', medController.excluirConsultaPac());
 
-
-
-    
 };

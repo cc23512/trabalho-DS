@@ -87,7 +87,7 @@ class CON_pacientes{
         });
     }
 
-    // exiber consulta paciente
+    // ---> exiber consulta paciente
     obterDetalhesConsulta(idConsulta) {
         return new Promise((resolve, reject) => {
             const PacienteDAO = new paciDAO(bd); // Crie uma instância do DAO aqui
@@ -121,7 +121,7 @@ class CON_pacientes{
         };
     }
 
-    // excluir consulta paciente
+    // ---> excluir consulta paciente
     excluirConsultaPac() {
         return function (req, res) {
             const PacienteDAO = new paciDAO(bd);

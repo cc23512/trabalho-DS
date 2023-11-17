@@ -88,7 +88,7 @@ class DAO_pacientes{
         });
     }
 
-    // alterar consulta
+    // ---> alterar consulta
     alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) {
         return new Promise((resolve, reject) => {
             const sql = "UPDATE Consulta SET dataConsulta = ?, horaConsulta = ?, tipoDeConsulta = ?, statusDaConsulta = ? WHERE idConsulta = ?";
@@ -122,17 +122,17 @@ class DAO_pacientes{
 
     // excluir consulta paciente
     excluirConsultaPac(idConsulta) {
-    return new Promise((resolve, reject) => {
-        const sql = "DELETE FROM Consulta WHERE idConsulta = ?";
-        this._bd.query(sql, [idConsulta], (erro) => {
-            if (erro) {
-                console.log(erro);
-                return reject("Erro ao excluir a consulta.");
-            }
-            resolve();
+        return new Promise((resolve, reject) => {
+            const sql = "DELETE FROM Consulta WHERE idConsulta = ?";
+            this._bd.query(sql, [idConsulta], (erro) => {
+                if (erro) {
+                    console.log(erro);
+                    return reject("Erro ao excluir a consulta.");
+                }
+                resolve();
+            });
         });
-    });
-}
+    }
     
 } 
 

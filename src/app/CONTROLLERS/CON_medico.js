@@ -50,6 +50,43 @@ class CON_medico{
         });
     }
 
+    // ---> Alterar consulta
+    alterarConsultaPac() {
+        return function (req, res) {
+            const MedicoDAO = new medDao(bd);
+            const idConsulta = req.params.idConsulta;
+            const { dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
+
+            MedicoDAO.alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
+                .then(() => {
+                    console.log("Consulta alterada com sucesso!");
+                    res.redirect("/consultasMed");
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao alterar a consulta.");
+                });
+        };
+    }
+
+    // ---> excluir consulta paciente
+    excluirConsultaPac() {
+        return function (req, res) {
+            const MedicoDAO = new medDao(bd);
+            const idConsulta = req.params.idConsulta;
+
+            MedicoDAO.excluirConsultaPac(idConsulta)
+                .then(() => {
+                    console.log("Consulta excluída com sucesso!");
+                    res.redirect("/consultasMed");
+                })
+                .catch((erro) => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao excluir a consulta.");
+                });
+        };
+    }
+
 }
 
 module.exports = CON_medico;
