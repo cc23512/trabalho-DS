@@ -4,81 +4,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>Login Medico</title>
+    <title>Login Médico</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../public/telaDeCadastro.css" />
   </head>
 
   <body>
-    <section class="h-100">
-      <div class="container h-100">
-        <div class="row justify-content-sm-center h-100">
-          <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-            <div class="text-center my-5">
-              <img
-                src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg"
-                alt="logo"
-                width="100"
-              />
-            </div>
-            <div class="card shadow-lg">
-              <div class="card-body p-5">
-                <h1 class="fs-4 card-title fw-bold mb-4">Login Medico</h1>
-                <form
-                  action="/loginMed"
-                  method="POST"
-                  class="needs-validation"
-                >
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="email"
-                      >Email</label
-                    >
-                    <input
-                      id="emailMed"
-                      type="email"
-                      class="form-control"
-                      name="emailMed"
-                      value=""
-                      required
-                      autofocus
-                    />
-                  </div>
+    <div class="bg__register"></div>
+    <div class="container__div">
+      <div class="heading">Login Médico</div>
+      <form action="/loginMed" method="post" class="form">
+        <input
+          required
+          class="input"
+          type="email"
+          name="emailMed"
+          id="emailMed"
+          placeholder="E-mail"
+        />
 
-                  <div class="mb-3">
-                    <div class="mb-2 w-100">
-                      <label class="text-muted" for="password">Senha</label>
+        <input
+          required
+          class="input"
+          type="password"
+          name="senhaMed"
+          id="senhaMed"
+          placeholder="Senha"
+        />
 
-                    <input
-                      id="senhaMed"
-                      type="password"
-                      class="form-control"
-                      name="senhaMed"
-                      required
-                    />
-                  </div>
-
-                    </div>
-                    <button type="submit" class="btn btn-primary ms-auto">
-                      Login
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer py-3 border-0">
-                <div class="text-center">
-                  <a href="/cadastroMedico" class="text-dark"
-                    >Criar Conta</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="forgot-password">
+          <a href="/loginMed">Não possui uma conta? <span>Criar agora</span></a>
         </div>
-      </div>
-    </section>
+        <input class="login-button" type="submit" value="Entrar" />
+      </form>
+    </div>
   </body>
 </html>

@@ -11,108 +11,64 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../public/telaDeCadastro.css" />
   </head>
 
   <body>
-    <section class="h-100">
-      <div class="container h-100">
-        <div class="row justify-content-sm-center h-100">
-          <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-            <div class="text-center my-5">
-              <img
-                src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg"
-                alt="logo"
-                width="100"
-              />
-            </div>
-            <div class="card shadow-lg">
-              <div class="card-body p-5">
-                <h1 class="fs-4 card-title fw-bold mb-4">Cadastro</h1>
-                <form
-                  method="POST"
-                  class="needs-validation"
-                  action="/inclusaoNovoCliente"
-                >
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="nome">Nome</label>
-                    <input
-                      id="nome"
-                      type="text"
-                      class="form-control"
-                      name="nome"
-                      required
-                      autofocus
-                    />
-                  </div>
+    <div class="bg__register"></div>
+    <div class="container__div">
+      <div class="heading">Cadastro Paciente</div>
+      <form action="/inclusaoNovoCliente" method="post" class="form">
+        <input
+          required
+          class="input"
+          type="text"
+          name="nome"
+          id="nome"
+          placeholder="Nome"
+        />
 
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="sobrenome"
-                      >Sobrenome</label
-                    >
-                    <input
-                      id="sobrenome"
-                      type="text"
-                      class="form-control"
-                      name="sobrenome"
-                      required
-                      autofocus
-                    />
-                  </div>
+        <input
+          required
+          class="input"
+          type="text"
+          name="sobrenome"
+          id="sobrenome"
+          placeholder="Sobrenome"
+        />
 
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="telefone"
-                      >Telefone</label
-                    >
-                    <input
-                      id="telefone"
-                      type="tel"
-                      class="form-control"
-                      name="telefone"
-                      required
-                      autofocus
-                    />
-                  </div>
+        <input
+          required
+          class="input"
+          type="number"
+          name="telefone"
+          id="telefone"
+          placeholder="Telefone"
+        />
 
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="email">Email</label>
-                    <input
-                      id="email"
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      required
-                    />
-                  </div>
+        <input
+          required
+          class="input"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="E-mail"
+        />
 
-                  <div class="mb-3">
-                    <label class="mb-2 text-muted" for="senha">Senha</label>
-                    <input
-                      id="senha"
-                      type="password"
-                      class="form-control"
-                      name="senha"
-                      required
-                    />
-                  </div>
+        <input
+          required
+          class="input"
+          type="password"
+          name="senha"
+          id="senha"
+          placeholder="Senha"
+        />
 
-                  <div class="align-items-center d-flex">
-                    <button type="submit" class="btn btn-primary ms-auto">
-                      Cadastrar
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer py-3 border-0">
-                <div class="text-center">
-                  <a href="/login" class="text-dark"
-                    >Ja tem uma conta? Entrar</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="forgot-password">
+          <a href="/login">Já Possui uma conta? <span>Entrar</span></a>
         </div>
-      </div>
-    </section>
+        <input class="login-button" type="submit" value="Cadastrar" />
+      </form>
+    </div>
   </body>
 </html>
