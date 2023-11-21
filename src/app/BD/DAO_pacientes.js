@@ -1,3 +1,6 @@
+const nodemailer = require('nodemailer');
+
+
 class DAO_pacientes{
 
     // construtor
@@ -133,7 +136,67 @@ class DAO_pacientes{
             });
         });
     }
+
+    enviarEmailConsulta(paciente, consulta, medico) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'cc23512@g.unicamp.br', // substitua pelo seu e-mail do Gmail
+            pass: 'abacatedoce966', // substitua pela sua senha do Gmail
+        },
+    });
+
+    console.log(consulta);
+
+    // Verifique se consulta não é null ou undefined antes de acessar suas propriedades
+    if (consulta) {
+        const mailOptions = {
+            from: 'cc23512@g.unicamp.br',
+            to: paciente.email,
+            subject: 'Consulta Agendada',
+            html: `
+                <p>Olá ${paciente.nome},</p>
+                <p>Sua consulta foi agendada com sucesso para o médico ${medico.nomeMedico}.</p>
+                <p>Data: ${consulta.dataConsulta}</p>
+                <p>Hora: ${consulta.horaConsulta}</p>
+                <p>Tipo de Consulta: ${consulta.tipoDeConsulta}</p>
+                <p>Status: ${consulta.statusDaConsulta}</p>
+            `,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('E-mail enviado: ' + info.response);
+            }
+        });
+    } else {
+        console.log('Erro: Consulta é nula ou indefinida.');
+    }
     
+
+    
+    }
+
+    obterUltimaConsultaInserida() {
+            return new Promise((resolve, reject) => {
+                const sql = "SELECT MAX(idConsulta) AS ultimaConsulta FROM Consulta";
+
+                this._bd.query(sql, (erro, resultados) => {
+                    if (erro) {
+                        console.log(erro);
+                        return reject("Erro ao obter a última consulta inserida.");
+                    }
+
+                    const ultimaConsulta = resultados[0].ultimaConsulta;
+                    resolve(ultimaConsulta);
+                });
+            });
+        }
+
+
+   
 } 
 
 module.exports = DAO_pacientes;

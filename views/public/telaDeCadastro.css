@@ -14,6 +14,7 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
+    position: relative;
 }
 
 .container__div {
@@ -25,6 +26,13 @@ body {
     border: 5px solid rgb(255, 255, 255);
     box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body img{
+    width: 200px;
 }
 
 
