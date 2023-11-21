@@ -1,3 +1,5 @@
+intruções para roda o codigo
+
 npm para rodar o codigo
 npm install body-parser bootstrap ejs express express-ejs-layouts express-session moment mysql mysql2 nodemon
 só executar e boa :)
