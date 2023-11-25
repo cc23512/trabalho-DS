@@ -229,6 +229,7 @@ module.exports = (app) => {
             res.redirect('/loginMed');
         }
     });
+    
 
     app.post('/alterarConsulta/:idConsulta', paciController.alterarConsultaPac());
     app.post('/alterarConsultaMed/:idConsulta', medController.alterarConsultaPac());

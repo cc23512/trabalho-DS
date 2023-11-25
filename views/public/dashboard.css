@@ -1,23 +1,304 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+    --first-color: hsl(228, 81%, 49%);
+    --title-color: hsl(228, 12%, 15%);
+    --text-color: hsl(228, 8%, 50%);
+    --body-color: hsl(228, 100%, 99%);
+    --container-color: #fff;
+
+    --body-font: 'Poppins', sans-serif;
+    --normal-font-size: .938rem;
+}
+
+/* Responsive typography */
+@media screen and (min-width: 968px) {
+    :root {
+        --normal-font-size: 1rem;
+    }
+}
+
+/*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
     margin: 0;
 }
 
+body {
+    position: relative;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: #e8e8e8;
+    color: var(--text-color);
+}
+
+h1 {
+    color: var(--title-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+/*=============== NAV ===============*/
 .container {
-    text-align: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.section {
+    padding: 2rem 0;
+}
+
+@media screen and (max-width: 767px) {
+
+    .nav__logo,
+    .nav__toggle,
+    .nav__name {
+        display: none;
+    }
+
+    .nav__list {
+        position: fixed;
+        bottom: 2rem;
+        background-color: var(--container-color);
+        box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
+        width: 90%;
+        padding: 30px 40px;
+        border-radius: 1rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 36px;
+        transition: .4s;
+    }
+}
+
+.nav__link {
+    display: flex;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: .3s;
+}
+
+.nav__link i {
+    font-size: 1.25rem;
+}
+
+.nav__link:hover {
+    color: var(--first-color);
+}
+
+/* Active link */
+.active-link {
+    color: var(--first-color);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+    .nav__list {
+        column-gap: 20px;
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+    .nav__list {
+        width: 332px;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .container {
+        margin-left: 7rem;
+        margin-right: 1.5rem;
+    }
+
+    .nav {
+        position: fixed;
+        left: 0;
+        background-color: var(--container-color);
+        box-shadow: 1px 0 4px hsla(228, 81%, 49%, .15);
+        width: 84px;
+        height: 100vh;
+        padding: 2rem;
+        transition: .3s;
+        z-index: 4;
+    }
+
+    .nav__logo {
+        display: flex;
+    }
+
+    .nav__logo i {
+        font-size: 1.25rem;
+        color: var(--first-color);
+    }
+
+    .nav__logo-name {
+        color: var(--title-color);
+        font-weight: 600;
+    }
+
+    .nav__logo,
+    .nav__link {
+        align-items: center;
+        column-gap: 1rem;
+    }
+
+    .nav__list {
+        display: grid;
+        row-gap: 2.5rem;
+        margin-top: 10.5rem;
+    }
+
+    .nav__content {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .nav__toggle {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: var(--title-color);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 1.20rem;
+        display: grid;
+        place-items: center;
+        top: 2.5rem;
+        right: -15px;
+        cursor: pointer;
+        transition: .4s;
+    }
+}
+
+/* Show menu */
+.show-menu {
+    width: 255px;
+}
+
+/* Rotate toggle icon */
+.rotate-icon {
+    transform: rotate(180deg);
+}
+
+/* For 2K & 4K resolutions */
+@media screen and (min-width: 2048px) {
+    body {
+        zoom: 1.7;
+    }
+}
+
+@media screen and (min-width: 3840px) {
+    body {
+        zoom: 2.5;
+    }
+}
+
+/* Estilos para o cabeçalho */
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - 84px);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--container-color);
+    box-shadow: 0 4px 8px hsla(228, 81%, 24%, .15);
+    z-index: 1;
+}
+
+.header__logo img {
+    width: 120px;
+    height: auto;
+    margin-left: rem;
+}
+
+.header__user-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.medico-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .card {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
+    border: none;
+    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
 }
 
-.btn {
+.user-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+}
+
+.user-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.medico-info h4 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.medico-info p {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.medico-info a {
+    display: inline-block;
     margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
+.medico-info a.ver-consultas-btn2{
+    background-color: rgb(213, 213, 32);
+    
+}
+
+.section__container {
+    width: calc(100% - 84px);
+    height: calc(100% - 70px);
+    position: absolute;
+    left: 84px;
+    top: 70px;
+    /* Ajuste conforme a altura do header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -37,17 +37,19 @@ class DAO_medico{
     }
 
     consultarConsultasMed(idMedico) {
-        return new Promise((resolve, reject) => {
-            const sql = "SELECT * FROM Consulta WHERE idMedico = ?";
-            this._bd.query(sql, [idMedico], (erro, resultados) => {
-                if (erro) {
-                    console.log(erro);
-                    return reject("Erro ao consultar consultas do médico.");
-                }
-                resolve(resultados);
-            });
+    return new Promise((resolve, reject) => {
+        // seleciona tudo da consulta "c" e o Paciente.nomePaciente da tabela consulta , entra na tabela paciente, pela consulta.idPaciente
+        // e pega o paciente, e interliga com o idMedico fazendo assim printar o nome do paciente na tabela :)
+        const sql = "SELECT c.*, p.nomePaciente FROM Consulta c JOIN Paciente p ON c.idPaciente = p.idPaciente WHERE idMedico = ?"; 
+        this._bd.query(sql, [idMedico], (erro, resultados) => {
+            if (erro) {
+                console.log(erro);
+                return reject("Erro ao consultar consultas do médico.");
+            }
+            resolve(resultados);
         });
-    }
+    });
+}
 
     alterarConsultaPac(idConsulta, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta) {
         return new Promise((resolve, reject) => {

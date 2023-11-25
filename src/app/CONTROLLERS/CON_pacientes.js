@@ -78,6 +78,7 @@ class CON_pacientes{
             PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
                 .then(() => {
                     console.log("Registro inserido com sucesso!");
+                    console.log("Olhe sua caixa de email!")
                     res.redirect("/consultas"); 
                 })
                 .catch(erro => {

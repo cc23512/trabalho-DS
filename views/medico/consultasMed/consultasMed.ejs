@@ -3,65 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Consultas Med</title>
 
+    <!--=============== BOXICONS ===============-->
     <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+
+    <!--=============== CSS ===============-->
     <link rel="stylesheet" href="../../public/consultas.css" />
+
+    <title>Dashboard Médico</title>
   </head>
-
   <body>
-    <div class="container mt-5">
-      <h2>Consultas do Medico <%= medico.nomeMedico %></h2>
+    <!--=============== NAV ===============-->
+    <div class="nav" id="nav">
+      <nav class="nav__content">
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-chevron-right"></i>
+        </div>
 
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID Consulta</th>
-            <th>Médico</th>
-            <th>Data</th>
-            <th>Horario</th>
-            <th>Tipo de Consulta</th>
-            <th>Status</th>
-            <th>Alterar Consulta</th>
-            <th>Excluir Consulta</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (const consulta of consultas) { %>
-          <tr>
-            <td><%= consulta.idConsulta %></td>
-            <td><%= medico.nomeMedico %></td>
-            <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
-            <td><%= consulta.horaConsulta %></td>
-            <td><%= consulta.tipoDeConsulta %></td>
-            <td><%= consulta.statusDaConsulta %></td>
-            <td>
-              <a
-                href="/alterarConsultaMed/<%= consulta.idConsulta %>"
-                class="btn btn-warning"
-                >Alterar</a
-              >
-            </td>
-            <td>
-              <form
-                action="/excluirConsultaMed/<%= consulta.idConsulta %>"
-                method="post"
-              >
-                <button type="submit" class="btn btn-danger">Excluir</button>
-              </form>
-            </td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
+        <a href="/dashboardMed" class="nav__logo">
+          <i class="bx bxs-heart"></i>
+          <span class="nav__logo-name">Médico <br />Dashboard</span>
+        </a>
 
-      <a href="/dashboardMed" class="btn btn-primary">Voltar</a>
+        <div class="nav__list">
+          <a href="/dashboardMed" class="nav__link">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav__name">Dashboard</span>
+          </a>
+
+          <a href="/consultasMed" class="nav__link active-link">
+            <i class="bx bx-file"></i>
+            <span class="nav__name">Consultas</span>
+          </a>
+        </div>
+      </nav>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <header class="header">
+      <div class="header__logo">
+        <a href="/dashboardMed"
+          ><img src="../public/imgs/logo_heart.png" alt="Logo"
+        /></a>
+      </div>
+      <div class="header__user-icon">
+        <!-- Substitua bx-user pelo ícone de usuário desejado -->
+        <a href=""><i class="bx bx-user"></i></a>
+      </div>
+    </header>
+
+    <section class="section__container">
+      <main class="table">
+        <section class="table__header">
+          <h1>Consultas médico <%= medico.nomeMedico %></h1>
+        </section>
+        <section class="table__body">
+          <table>
+            <thead>
+              <tr>
+                <th>ID Consulta</th>
+                <th>Médico</th>
+                <th>Paciente</th>
+                <th>Data</th>
+                <th>Horario</th>
+                <th>Tipo de Consulta</th>
+                <th>Status</th>
+                <th>Alterar Consulta</th>
+                <th>Excluir Consulta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const consulta of consultas) { %>
+              <tr>
+                <td><%= consulta.idConsulta %></td>
+                <td><%= medico.nomeMedico %></td>
+                <td><%= consulta.nomePaciente %></td>
+                <td>
+                  <%= new Date(consulta.dataConsulta).toLocaleDateString() %>
+                </td>
+                <td><%= consulta.horaConsulta %></td>
+                <td><%= consulta.tipoDeConsulta %></td>
+                <td><%= consulta.statusDaConsulta %></td>
+                <td>
+                  <a
+                    href="/alterarConsultaMed/<%= consulta.idConsulta %>"
+                    class="btn btn-warning"
+                    >Alterar</a
+                  >
+                </td>
+                <td>
+                  <form
+                    action="/excluirConsultaMed/<%= consulta.idConsulta %>"
+                    method="post"
+                  >
+                    <button type="submit" class="btn btn-danger">
+                      Excluir
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </section>
   </body>
 </html>

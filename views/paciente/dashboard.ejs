@@ -2,46 +2,118 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="./public/dashboard.css" />
+
+    <!--=============== BOXICONS ===============-->
     <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
       rel="stylesheet"
     />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../public/dashboard.css" />
+
+    <title>Dashboard Paciente</title>
   </head>
-
   <body>
-    <div class="container">
-      <div class="card">
-        <h4 class="mb-3">
-          Bem-vindo <%= paciente.nomePaciente %> <%= paciente.sobrenomePac %>
-        </h4>
+    <!--=============== NAV ===============-->
+    <div class="nav" id="nav">
+      <nav class="nav__content">
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-chevron-right"></i>
+        </div>
 
-        <a href="/agendarConsultaPac" class="btn btn-primary btn-sm"
-          >Fazer Consulta</a
-        >
+        <a href="/dashboard" class="nav__logo">
+          <i class="bx bxs-heart"></i>
+          <span class="nav__logo-name">Paciente <br />Dashboard</span>
+        </a>
 
-        <a href="/consultas" class="btn btn-info btn-sm">Consultar Consultas</a>
+        <div class="nav__list">
+          <a href="/dashboard" class="nav__link active-link">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav__name">Dashboard</span>
+          </a>
 
-        <a href="/verEmail" class="btn btn-dark">Ver Emails</a>
-      </div>
+          <a href="/consultas" class="nav__link">
+            <i class="bx bx-file"></i>
+            <span class="nav__name">Consultas</span>
+          </a>
+
+          <a href="/verEmail" class="nav__link">
+            <i class="bx bx-envelope"></i>
+            <span class="nav__name">Emails</span>
+          </a>
+        </div>
+      </nav>
     </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEH"
-    ></script>
+    <header class="header">
+      <div class="header__logo">
+        <a href="/dashboard"
+          ><img src="../public/imgs/logo_heart.png" alt="Logo"
+        /></a>
+      </div>
+      <div class="header__user-icon">
+        <a href=""><i class="bx bx-user"></i></a>
+      </div>
+    </header>
+
+    <section class="section__container">
+      <div class="medico-container">
+        <div class="card">
+          <div class="user-icon">
+            <img
+              src="../public/imgs/imagem-do-usuario-com-fundo-preto.png"
+              alt="Imagem do Médico"
+            />
+          </div>
+          <div class="medico-info">
+            <h4>
+              Bem-vindo <%= paciente.nomePaciente %> <%= paciente.sobrenomePac
+              %>
+            </h4>
+            <p>Email: <%= paciente.email %></p>
+            <p>Telefone: <%= paciente.telefone %></p>
+            <p>Endereço do Consultório: Rua Paracatu, 312</p>
+            <!-- Adicione mais informações conforme necessário -->
+            <a href="/consultas" class="ver-consultas-btn">Ver Consultas</a>
+            <a href="/agendarConsultaPac" class="ver-consultas-btn2"
+              >Fazer Consulta</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--=============== MAIN ===============-->
+
+    <!--=============== MAIN JS ===============-->
+    <script>
+      /*=============== LINK ACTIVE ===============*/
+      const linkColor = document.querySelectorAll(".nav__link");
+
+      function colorLink() {
+        linkColor.forEach((l) => l.classList.remove("active-link"));
+        this.classList.add("active-link");
+      }
+
+      linkColor.forEach((l) => l.addEventListener("click", colorLink));
+
+      /*=============== SHOW HIDDEN MENU ===============*/
+      const showMenu = (toggleId, navbarId) => {
+        const toggle = document.getElementById(toggleId),
+          navbar = document.getElementById(navbarId);
+
+        if (toggle && navbar) {
+          toggle.addEventListener("click", () => {
+            /* Show menu */
+            navbar.classList.toggle("show-menu");
+            /* Rotate toggle icon */
+            toggle.classList.toggle("rotate-icon");
+          });
+        }
+      };
+      showMenu("nav-toggle", "nav");
+    </script>
   </body>
 </html>

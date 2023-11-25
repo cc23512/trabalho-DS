@@ -1,21 +1,63 @@
-<!-- views/consultas.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Novos emails</title>
 
+    <!--=============== BOXICONS ===============-->
     <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="../../public/consultas.css" />
-  </head>
 
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../../public/consultas.css" />
+
+    <title>Dashboard Médico</title>
+  </head>
   <body>
-    <div class="container mt-5">
+    <!--=============== NAV ===============-->
+    <div class="nav" id="nav">
+      <nav class="nav__content">
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="bx bx-chevron-right"></i>
+        </div>
+
+        <a href="/dashboard" class="nav__logo">
+          <i class="bx bxs-heart"></i>
+          <span class="nav__logo-name">Médico <br />Dashboard</span>
+        </a>
+
+        <div class="nav__list">
+          <a href="/dashboard" class="nav__link">
+            <i class="bx bx-grid-alt"></i>
+            <span class="nav__name">Dashboard</span>
+          </a>
+
+          <a href="/consultas" class="nav__link ">
+            <i class="bx bx-file"></i>
+            <span class="nav__name">Consultas</span>
+          </a>
+
+          <a href="/verEmail" class="nav__link active-link">
+            <i class="bx bx-envelope"></i>
+            <span class="nav__name">Emails</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <header class="header">
+      <div class="header__logo">
+        <a href="/dashboard"><img src="../public/imgs/logo_heart.png" alt="Logo" /></a>
+      </div>
+      <div class="header__user-icon">
+        <a href=""><i class="bx bx-user"></i></a>
+      </div>
+    </header>
+
+    <section class="section__container">
+      <div class="container-1 mt-5">
       <div class="jumbotron">
         <h1 class="display-4">
           Novo email do paciente <%= paciente.nomePaciente %>
@@ -24,21 +66,24 @@
       </div>
 
       <% if (consultas && consultas.length > 0) { %>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">
-            Consulta ID: <%= consultas[0].idConsulta %>
-          </h5>
-          <p class="card-text">Médico: <%= consultas[0].nomeMedico %></p>
-          <p class="card-text">
-            Data: <%= new Date(consultas[0].dataConsulta).toLocaleDateString()
-            %>
-          </p>
-          <p class="card-text">Horário: <%= consultas[0].horaConsulta %></p>
-          <p class="card-text">
-            Tipo de Consulta: <%= consultas[0].tipoDeConsulta %>
-          </p>
-          <p class="card-text">Status: <%= consultas[0].statusDaConsulta %></p>
+      <div class="card-container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Consulta ID: <%= consultas[0].idConsulta %>
+            </h5>
+            <p class="card-text">Médico: <%= consultas[0].nomeMedico %></p>
+            <p class="card-text">
+              Data: <%= new Date(consultas[0].dataConsulta).toLocaleDateString()
+              %>
+            </p>
+            <p class="card-text">Horário: <%= consultas[0].horaConsulta %></p>
+            <p class="card-text">
+              Tipo de Consulta: <%= consultas[0].tipoDeConsulta %>
+            </p>
+            <p class="card-text">Status: <%= consultas[0].statusDaConsulta %></p>
+            <p class="card-text">Endereço: Rua Paracatu, 312</p>
+          </div>
         </div>
       </div>
       <% } else { %>
@@ -47,9 +92,8 @@
 
       <a href="/verEmail" class="btn btn-primary">Voltar</a>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </section>
+      </main>
+    </section>
   </body>
 </html>
