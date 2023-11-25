@@ -142,7 +142,7 @@ class DAO_pacientes{
         service: 'gmail',
         auth: {
             user: 'cc23512@g.unicamp.br', // substitua pelo seu e-mail do Gmail
-            pass: 'abacatedoce966', // substitua pela sua senha do Gmail
+            pass: 'a', // substitua pela sua senha do Gmail
         },
     });
 

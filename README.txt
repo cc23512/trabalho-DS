@@ -6,3 +6,7 @@ só executar e boa :)
 
 para começar a rodar o codigo so ir no localhost:3000
 e la vai acontecer a magia...
+
+nao consegui fazer enviar o email, pois tenho que ter uma tabela email no bd
+e eu nao tenho, mas a logica de enviar email esta "certa", so falta a tabela :)
+o cadastro esta cadastrando da erro no email somente, mas esta indo para o bd
