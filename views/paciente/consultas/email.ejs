@@ -1,11 +1,10 @@
-<!-- views/consultas.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Consultas</title>
+    <title>Emails</title>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -15,18 +14,14 @@
 
   <body>
     <div class="container mt-5">
-      <h2>Consultas do Paciente <%= paciente.nomePaciente %></h2>
+      <h2>Novos emails do paciente <%= paciente.nomePaciente %></h2>
+
       <table class="table table-striped">
         <thead>
           <tr>
             <th>ID Consulta</th>
             <th>Médico</th>
-            <th>Data</th>
-            <th>Horario</th>
-            <th>Tipo de Consulta</th>
-            <th>Status</th>
-            <th>Alterar Consulta</th>
-            <th>Excluir Consulta</th>
+            <th>Mais Informações</th>
           </tr>
         </thead>
         <tbody>
@@ -34,24 +29,13 @@
           <tr>
             <td><%= consulta.idConsulta %></td>
             <td><%= consulta.nomeMedico %></td>
-            <td><%= new Date(consulta.dataConsulta).toLocaleDateString() %></td>
-            <td><%= consulta.horaConsulta %></td>
-            <td><%= consulta.tipoDeConsulta %></td>
-            <td><%= consulta.statusDaConsulta %></td>
             <td>
               <a
-                href="/alterarConsulta/<%= consulta.idConsulta %>"
-                class="btn btn-warning"
-                >Alterar</a
+                href="/emailCompleto/<%= consulta.idConsulta %>"
+                class="btn btn-danger btn-sm"
               >
-            </td>
-            <td>
-              <form
-                action="/excluirConsulta/<%= consulta.idConsulta %>"
-                method="post"
-              >
-                <button type="submit" class="btn btn-danger">Excluir</button>
-              </form>
+                Ver Email
+              </a>
             </td>
           </tr>
           <% } %>
@@ -60,6 +44,7 @@
 
       <a href="/dashboard" class="btn btn-primary">Voltar</a>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

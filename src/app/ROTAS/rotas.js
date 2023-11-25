@@ -117,6 +117,44 @@ module.exports = (app) => {
         }
     });
 
+    app.get('/verEmail', (req, res) => {
+        if (req.session.user) {
+            const paciente = req.session.user;
+            
+        
+            paciController.consultarConsultas(paciente.idPaciente)
+            .then(consultas => {
+                res.render('../views/paciente/consultas/email', { paciente, consultas });
+            })
+            .catch(erro => {
+                console.log(erro);
+                res.status(500).send('Erro ao buscar consultas.');
+            });
+        } else {
+            res.redirect('/login');
+        }
+    });
+
+    app.get('/emailCompleto/:idConsulta', (req, res) => {
+        if (req.session.user) {
+            const paciente = req.session.user;
+            const idConsulta = req.params.idConsulta;
+
+            paciController.consultarEmail(idConsulta)
+                .then(consulta => {
+                    res.render('../views/paciente/consultas/emailCompleto', { paciente, consultas: [consulta] });
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send('Erro ao buscar consultas.');
+                });
+        } else {
+            res.redirect('/login');
+        }
+    });
+
+    
+
     app.get('/consultasMed', (req, res) => {
         if (req.session.user) {
             const medico = req.session.user;

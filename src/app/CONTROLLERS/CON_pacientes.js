@@ -1,7 +1,5 @@
 const paciDAO = require("../BD/DAO_pacientes");
 const bd = require("../../config/database");
-const nodemailer = require('nodemailer');
-
 
 class CON_pacientes{
     // ...
@@ -56,60 +54,38 @@ class CON_pacientes{
         });
     }
 
+    consultarEmail(idConsulta) {
+        return new Promise((resolve, reject) => {
+            const PacienteDAO = new paciDAO(bd);
+
+            PacienteDAO.consultarEmail(idConsulta)
+                .then(consulta => {
+                    resolve(consulta);
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    reject("Erro ao consultar consultas.");
+                });
+            });
+        }
+
     // ---> agender Consultas
     cadastrarConsultaPac() {
-    return function (req, res) {
-        const PacienteDAO = new paciDAO(bd);
-        const { idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
+        return function(req, res) {
+            const PacienteDAO = new paciDAO(bd);
+            const { idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta } = req.body;
 
-        // Agende a consulta
-        PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
-            .then(() => {
-                // Obtenha os detalhes do paciente
-                const paciente = req.session.user;
-
-                // Obtenha a última idConsulta
-                PacienteDAO.obterUltimaConsultaInserida()
-                    .then((idConsulta) => {
-                        // Obtenha os detalhes da consulta recém-agendada
-                        PacienteDAO.obterDetalhesConsulta(idConsulta)
-                            .then(consulta => {
-                                // Obtenha os detalhes do médico associado à consulta
-                                PacienteDAO.obterTodosOsMedicos(idMedico)
-                                    .then(medicos => {
-                                        const medico = medicos[0]; // Assumindo que há apenas um médico com o ID fornecido
-
-                                        // Envie o e-mail
-                                        PacienteDAO.enviarEmailConsulta(paciente, consulta, medico)
-                                            .then(() => {
-                                                res.redirect("/consultas");
-                                            })
-                                            .catch(erro => {
-                                                console.log(erro);
-                                                res.status(500).send("Erro ao enviar e-mail de confirmação.");
-                                            });
-                                    })
-                                    .catch(erro => {
-                                        console.log(erro);
-                                        res.status(500).send("Erro ao obter detalhes do médico.");
-                                    });
-                            })
-                            .catch(erro => {
-                                console.log(erro);
-                                res.status(500).send("Erro ao obter detalhes da consulta.");
-                            });
-                    })
-                    .catch(erro => {
-                        console.log(erro);
-                        res.status(500).send("Erro ao obter a última consulta inserida.");
-                    });
-            })
-            .catch(erro => {
-                console.log(erro);
-                res.status(500).send("Erro ao inserir o registro.");
-            });
-    };
-}
+            PacienteDAO.agendarConsultaPac(idMedico, idPaciente, dataConsulta, horaConsulta, tipoDeConsulta, statusDaConsulta)
+                .then(() => {
+                    console.log("Registro inserido com sucesso!");
+                    res.redirect("/consultas"); 
+                })
+                .catch(erro => {
+                    console.log(erro);
+                    res.status(500).send("Erro ao inserir o registro.");
+                });
+        };
+    }
 
     // ---> obter dados dos medicos para o form agender consulta
     obterListaDeMedicos() {
@@ -177,6 +153,8 @@ class CON_pacientes{
                 });
         };
     }
+
+    
 
     
 

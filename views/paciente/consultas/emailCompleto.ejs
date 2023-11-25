@@ -1,0 +1,55 @@
+<!-- views/consultas.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novos emails</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../../public/consultas.css" />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="jumbotron">
+        <h1 class="display-4">
+          Novo email do paciente <%= paciente.nomePaciente %>
+        </h1>
+        <p class="lead">Aqui estão as informações das consultas do paciente:</p>
+      </div>
+
+      <% if (consultas && consultas.length > 0) { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            Consulta ID: <%= consultas[0].idConsulta %>
+          </h5>
+          <p class="card-text">Médico: <%= consultas[0].nomeMedico %></p>
+          <p class="card-text">
+            Data: <%= new Date(consultas[0].dataConsulta).toLocaleDateString()
+            %>
+          </p>
+          <p class="card-text">Horário: <%= consultas[0].horaConsulta %></p>
+          <p class="card-text">
+            Tipo de Consulta: <%= consultas[0].tipoDeConsulta %>
+          </p>
+          <p class="card-text">Status: <%= consultas[0].statusDaConsulta %></p>
+        </div>
+      </div>
+      <% } else { %>
+      <p>Nenhuma consulta encontrada.</p>
+      <% } %>
+
+      <a href="/verEmail" class="btn btn-primary">Voltar</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

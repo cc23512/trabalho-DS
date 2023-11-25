@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Dashboard Médico</title>
     <link rel="stylesheet" href="./public/dashboard.css" />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,16 +16,10 @@
     <div class="container">
       <div class="card">
         <h4 class="mb-3">
-          Bem-vindo <%= paciente.nomePaciente %> <%= paciente.sobrenomePac %>
+          Bem-vindo <%= medico.nomeMedico %> <%= medico.sobrenomeMed %>
         </h4>
 
-        <a href="/agendarConsultaPac" class="btn btn-primary btn-sm"
-          >Fazer Consulta</a
-        >
-
-        <a href="/consultas" class="btn btn-info btn-sm">Consultar Consultas</a>
-
-        <a href="/verEmail" class="btn btn-dark">Ver Emails</a>
+        <a href="/consultasMed" class="btn btn-primary btn-sm">Ver Consultas</a>
       </div>
     </div>
 
@@ -41,7 +35,8 @@
     ></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEH"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEH
+    "
     ></script>
   </body>
 </html>
